@@ -1,4 +1,5 @@
 import models.Item;
+import models.User;
 import org.postgresql.Driver;
 
 import java.security.spec.ECField;
@@ -48,25 +49,49 @@ public class DbConnect {
         return items;
     }
 
-    public static String autoBd(String email, String pass){
-        String name;
-        String password;
+    public static User autoBd(String email, String pass) {
+        User u = null;
         try {
             PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM users WHERE email=?");
-            statement.setString(1,email);
-
+                    "SELECT * FROM users WHERE email=?");
+            statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
-            name = resultSet.getString("fullName");
-            password = resultSet.getString("password");
-            statement.close();
-            if(password.equals(pass)){
-            return  name;}
+            if (resultSet.next()) {
+                u = new User();
+                u.setFullName(resultSet.getString("fullName"));
+                u.setEmail(resultSet.getString("email"));
+                u.setPassword(resultSet.getString("password"));
+                u.setId(resultSet.getLong("id"));
+                statement.close();
 
-        } catch (Exception e){
+                if (u.getPassword().equals(pass)) {
+                    return u;
+                }
+                return null;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    public static void addUser(User u) {
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO users (email, password, fullname) values (?,?,?)"
+            );
+            statement.setString(1, u.getEmail());
+            statement.setString(2, u.getPassword());
+            statement.setString(3, u.getFullName());
+            statement.executeUpdate();
+            statement.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
