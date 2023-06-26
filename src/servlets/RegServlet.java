@@ -1,3 +1,6 @@
+package servlets;
+
+import bd.DbConnect;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

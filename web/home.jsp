@@ -22,11 +22,12 @@
         <div class="col-sm-3">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title"><%=it.getName()%></h5>
+                    <h5 class="card-title"> <%=it.getBrand_id().getBrand_name()%> <%=it.getName()%></h5>
                 </div>
                 <div class="card-body" style="height: 150px;">
                     <h4 class="card-title" style="color: #0a58ca  "> <%=it.getPrice()%></h4>
                     <p class="card-text"><%=it.getDescription()%></p>
+                    <h6 class="card-title">Страна производителя: <%=it.getBrand_id().getCountry_id().getCountry_name()%></h6>
                 </div>
                 <div class="card-footer">
                     <a href="#" class="btn btn-primary col-12">Купить сейчас</a>

@@ -14,7 +14,7 @@
           <a class="nav-link" href="/adminpanel">Администрирование</a>
         </li>
         <li class="nav-item" >
-          <a style="text-align: right" class="nav-link" href="/autorisation">Авторизация</a>
+          <a style="text-align: right" class="nav-link" href="/users">Пользователи</a>
         </li>
 
       </ul>
